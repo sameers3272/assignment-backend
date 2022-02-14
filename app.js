@@ -39,24 +39,6 @@ app.use(flash());
 
 
 
-
-app.use((req, res, next) => {
-    if (!req.session.user) {
-        return next();
-    }
-    User.findById(req.session.user._id)
-        .then(user => {
-            if (!user) {
-                return next();
-            }
-            req.user = user;
-            return next();
-        })
-        .catch(err => console.log(err));
-});
-
-
-
 app.use((req, res, next)=> {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers','Origin','X-Requested-With', 'Content-Type','Accept','Authorization');
